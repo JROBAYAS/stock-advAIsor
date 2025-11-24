@@ -1,0 +1,32 @@
+name: Daily Email
+
+on:
+  schedule:
+    - cron: "0 6 * * *"  # 08:00 hora España aprox
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+
+      - name: Run script using Poetry
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PWD: ${{ secrets.EMAIL_PWD }}
+        run: poetry run python main.py
+
