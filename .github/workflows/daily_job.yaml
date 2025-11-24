@@ -32,5 +32,8 @@ jobs:
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PWD: ${{ secrets.EMAIL_PWD }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          NEWSAPI_API_KEY: ${{ secrets.NEWSAPI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: poetry run python main.py
 

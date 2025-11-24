@@ -26,6 +26,9 @@ def set_environment_variables(credentials):
     email_config = credentials.get('email_notifications', {})
     os.environ['EMAIL_USER'] = email_config.get('email', '')
     os.environ['EMAIL_PWD'] = email_config.get('pwd_app', '')
+    # os.environ['OPENAI_API_KEY'] = credentials.get('openai', {}).get('api_key', '')
+    os.environ['NEWSAPI_API_KEY'] = credentials.get('newsapi', {}).get('api_key', '')
+    os.environ['GROQ_API_KEY'] = credentials.get('grog', {}).get('api_key', '')
     
     # Configurar otras variables si es necesario
     settings = credentials.get('settings', {})
@@ -38,18 +41,13 @@ def set_environment_variables(credentials):
     print(f"  - DEBUG: {os.environ['DEBUG']}")
     print()
 
-def main():
-    """Función principal"""
-    print("=" * 60)
-    print("🚀 Ejecutando main.py en modo local")
-    print("=" * 60)
-    print()
-    
+
+if __name__ == "__main__":
     # Cargar credenciales
     print("📁 Cargando credenciales desde credentials.yaml...")
     credentials = load_credentials()
-    
-    # Configurar variables de entorno
+
+     # Configurar variables de entorno
     set_environment_variables(credentials)
     
     # Importar y ejecutar main
@@ -57,17 +55,9 @@ def main():
     print("-" * 60)
     
     try:
-        # Importar el módulo main
-        import main
-        
-        # Ejecutar la función principal si existe
-        if hasattr(main, 'send_email'):
-            main.send_email()
-            print("-" * 60)
-            print("✅ Ejecución completada exitosamente")
-        else:
-            print("❌ Error: No se encontró la función send_email en main.py")
-            sys.exit(1)
+        from main import main
+        main()
+        print("✅ Ejecución completada exitosamente")
             
     except Exception as e:
         print("-" * 60)
@@ -76,5 +66,3 @@ def main():
         traceback.print_exc()
         sys.exit(1)
 
-if __name__ == "__main__":
-    main()
