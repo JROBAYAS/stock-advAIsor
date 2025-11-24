@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "stock-advaisor"
+version = "0.1.0"
+description = "stock recommender to ingest, evaluate and advise daily movements of buy/sell for different stock actives in the finantial world market"
+authors = ["JR Obaya <joserraobaya@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^2.3.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
