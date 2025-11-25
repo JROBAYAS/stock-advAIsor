@@ -28,7 +28,7 @@ def set_environment_variables(credentials):
     os.environ['EMAIL_PWD'] = email_config.get('pwd_app', '')
     # os.environ['OPENAI_API_KEY'] = credentials.get('openai', {}).get('api_key', '')
     os.environ['NEWSAPI_API_KEY'] = credentials.get('newsapi', {}).get('api_key', '')
-    os.environ['GROQ_API_KEY'] = credentials.get('grog', {}).get('api_key', '')
+    os.environ['GROQ_API_KEY'] = credentials.get('groq', {}).get('api_key', '')
     
     # Configurar otras variables si es necesario
     settings = credentials.get('settings', {})
@@ -54,9 +54,16 @@ if __name__ == "__main__":
     print("▶️  Ejecutando main.py...")
     print("-" * 60)
     
+    # TICKERS = {
+    #     "NVDA": "NVIDIA",
+    #     "TSLA": "Tesla",
+    #     "GOOGL": "Google",
+    # }
+    TICKERS = None  # Para usar los tickers más mencionados en noticias
+
     try:
         from main import main
-        main()
+        main(TICKERS)
         print("✅ Ejecución completada exitosamente")
             
     except Exception as e:
